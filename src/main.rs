@@ -13,31 +13,29 @@ fn first() {
 }
 
 fn main() {
-    first();
+    //first();
     //second();
-    /*
     match outer() {
         Ok(_) => {
             let msg = format!("Yay: success!!");
-            println!("{}", msg.green().bold())
+            println!("\n{}\n", msg.green().bold())
         },
         Err(e) => {
             let msg = format!("Failure: {}", e);
-            eprintln!("{}", msg.red());
+            eprintln!("\n{}\n", msg.red());
             process::exit(1);
         }
     }
-    */
 }
 
 fn outer() -> Result<(), Box<dyn ErrorTrait>> {
     // panics
-    let _a = step1();
+    //let _a = step1();
     //let _a = step1_1();
     //let _a = step1_2();
 
     //results
-    //let _a = step2();
+    let _a = step2();
     //let _a = step3()?;
 
     //options
