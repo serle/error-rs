@@ -19,7 +19,7 @@ fn main() {
         Ok(_) => {
             let msg = format!("Yay: success!!");
             println!("\n{}\n", msg.green().bold())
-        },
+        }
         Err(e) => {
             let msg = format!("Failure: {}", e);
             eprintln!("\n{}\n", msg.red());
@@ -39,9 +39,13 @@ fn outer() -> Result<(), Box<dyn ErrorTrait>> {
     //let _a = step3()?;
 
     //options
-    //let _a = step4();
+    let _a = step4();    
+    let _a = step4_1();
+    match _a {
+        Some(_) => Ok(()),
+        None => panic!("no file"),
+    }
 
-    Ok(())
 }
 
 //------------------------------------------------------------------------------
@@ -103,7 +107,7 @@ enum Failure {
     #[error("Content not found")] ContentNotFound,
     #[error("To few lines, found {0} lines")] ToFewLines(usize),
     #[error("To many lines, found {0} lines")] ToManyLines(usize),
-    #[error("Invalid line: {0} at {1}")] InvalidLine (usize, String),
+    #[error("Invalid line: {0} at {1}")] InvalidLine(usize, String),
 }
 
 fn step3() -> Result<String, Failure> {
@@ -126,7 +130,7 @@ fn step3() -> Result<String, Failure> {
         let (index, line) = entry;
         if line.contains("bad") {
             return Err(Failure::InvalidLine(index, line.to_string()));
-        };
+        }
     }
 
     Ok(contents)
@@ -154,4 +158,9 @@ fn step4() -> Option<File> {
     };
 
     greeting_file
+}
+
+// return the option and force the caller to deal with it as they see fit
+fn step4_1() -> Option<File> {
+    File::open("hello.txt").ok()
 }
